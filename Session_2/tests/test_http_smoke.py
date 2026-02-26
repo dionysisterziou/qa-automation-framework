@@ -1,4 +1,5 @@
 import requests
+from validations.posts import validate_post_1
 
 
 def test_get_post_1_status_code():
@@ -11,5 +12,4 @@ def test_get_post_1_body_fields():
     response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
     data = response.json()
 
-    assert data["id"] == 1, "ID should be 1"
-    assert data["userId"] == 1, "User ID should be 1"
+    validate_post_1(data)
