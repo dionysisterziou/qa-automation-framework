@@ -23,3 +23,17 @@ def test_get_post_1_wrong_expectation_should_fail():
 
     with pytest.raises(AssertionError):
         validate_post_1(data)
+
+
+@pytest.mark.parametrize(
+    "post_id",
+    [
+        1,
+        2,
+        3
+    ]
+)
+def test_get_posts_status_code_ok(post_id):
+    response = requests.get(f"https://jsonplaceholder.typicode.com/posts/{post_id}")
+
+    assert response.status_code == 200, "Status code should be 200"
