@@ -67,3 +67,11 @@ def test_response_json_on_plain_text_should_fail():
 def test_https_ssl_failure_should_raise():
     with pytest.raises(requests.exceptions.SSLError):
         requests.get("https://example.com", timeout=5)
+
+
+# Μάθημα 13: Redirects (301/302) με requests
+def test_redirect_302_has_location_header():
+    response = requests.get("https://httpbin.org/redirect/1", allow_redirects=False, timeout=5)
+
+    assert response.status_code in (301, 302), f"Expected redirect, got {response.status_code}"
+    assert "Location" in response.headers, "Redirect response should include Location header"
