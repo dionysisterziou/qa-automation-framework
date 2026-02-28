@@ -43,3 +43,9 @@ def test_get_post_invalid_id_returns_404():
     response = requests.get("https://jsonplaceholder.typicode.com/posts/0")
 
     assert response.status_code == 404, "Status code should be 404"
+
+
+def test_get_post_invalid_endpoint_returns_404():
+    response = requests.get("https://jsonplaceholder.typicode.com/invalid_endpoint")
+
+    assert response.status_code == 404, f"Unexpected status code: {response.status_code}"
