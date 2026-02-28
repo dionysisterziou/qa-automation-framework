@@ -49,3 +49,11 @@ def test_get_post_invalid_endpoint_returns_404():
     response = requests.get("https://jsonplaceholder.typicode.com/invalid_endpoint")
 
     assert response.status_code == 404, f"Unexpected status code: {response.status_code}"
+
+
+def test_timeout_should_raise_exception():
+    with pytest.raises(requests.exceptions.Timeout):
+        requests.get(
+            "https://jsonplaceholder.typicode.com/posts/1",
+            timeout=0.0001
+        )
