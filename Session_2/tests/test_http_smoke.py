@@ -75,3 +75,12 @@ def test_redirect_302_has_location_header():
 
     assert response.status_code in (301, 302), f"Expected redirect, got {response.status_code}"
     assert "Location" in response.headers, "Redirect response should include Location header"
+
+
+# Μάθημα 14: Redirect followed vs not followed (behaviour check)
+def test_redirect_is_followed_by_default():
+    response = requests.get("https://httpbin.org/redirect/1", timeout=5)
+
+    assert response.status_code == 200, f"Expected final 200, got {response.status_code}"
+    assert len(response.history) == 1, f"Expected 1 redirect, got {len(response.history)}"
+    assert response.history[0].status_code in (301, 302), "History should contain redirect response"
