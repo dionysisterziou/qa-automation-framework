@@ -55,7 +55,7 @@ def test_timeout_should_raise_exception():
 
 # Μάθημα 12: Invalid JSON (JSON decode error)
 def test_response_json_on_plain_text_should_fail():
-    response = get("/", timeout=5)
+    response = requests.get("https://httpbin.org/html", timeout=5)
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
 
     with pytest.raises(ValueError):
