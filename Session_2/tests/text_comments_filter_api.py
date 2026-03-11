@@ -1,4 +1,5 @@
 import pytest
+from validations.post_comments_api import validate_comment
 
 @pytest.mark.parametrize(
     "post_id",
@@ -15,4 +16,4 @@ def test_get_comments_filter_api(client_get, post_id):
     assert data, "Empty list"
 
     for comment in data:
-        assert comment["postId"] == post_id, f"Expected {post_id}, got {comment['postId']}"
+        validate_comment(comment, post_id)
