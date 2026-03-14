@@ -10,4 +10,5 @@ def test_get_comment_by_id_ok(client_get, comment_id):
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     
     data = response.json()
+
     validate_comment_by_id(data, comment_id)
