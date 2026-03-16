@@ -22,4 +22,4 @@ def test_get_user_missing_resource(client_get):
     assert response.status_code == 404
 
     data = response.json()
-    assert data = {}
+    assert data == {}
