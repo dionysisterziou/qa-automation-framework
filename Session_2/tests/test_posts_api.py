@@ -1,4 +1,5 @@
 import pytest
+from http_client import parse_json
 from validations.posts_api import validate_post_by_id
 from validations.posts_api import validate_post_for_user
 
@@ -8,7 +9,7 @@ def test_get_post_by_id_ok(client_get):
 
     assert response.status_code == 200
 
-    data = response.json()
+    data = parse_json(response)
 
     validate_post_by_id(data, 1)
 
@@ -24,7 +25,7 @@ def test_get_posts_for_user_ok(client_get, user_id):
 
     assert response.status_code == 200
 
-    data = response.json()
+    data = parse_json(response)
 
     assert isinstance(data, list)
     assert data
@@ -39,7 +40,7 @@ def test_get_posts_filter_by_user_ok(client_get, user_id):
 
     assert response.status_code == 200
 
-    data = response.json()
+    data = parse_json(response)
 
     assert isinstance(data, list)
     assert data
@@ -53,7 +54,7 @@ def test_get_posts_filter_by_user_empty_result(client_get):
 
     assert response.status_code == 200
 
-    data = response.json()
+    data = parse_json(response)
 
     assert isinstance(data, list)
     assert data == []
