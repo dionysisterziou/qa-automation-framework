@@ -1,7 +1,8 @@
 import pytest
-from http_client import get
+from http_client import HttpClient
+from config import BASE_URL
 
 
 @pytest.fixture
-def client_get():
-    return get
+def api_client():
+    return HttpClient(BASE_URL)

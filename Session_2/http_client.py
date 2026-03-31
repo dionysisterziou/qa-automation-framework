@@ -1,12 +1,16 @@
 import pytest
 import requests
-from config import BASE_URL
 
 
-def get(path, **kwargs):
-    full_url = BASE_URL + path
-    kwargs.setdefault("timeout", 5)
-    return requests.get(full_url, **kwargs)
+class HttpClient:
+    def __init__(self, base_url):
+        self.base_url = base_url
+
+    
+    def get(self, path, **kwargs):
+        full_url = self.base_url + path
+        kwargs.setdefault("timeout", 5)
+        return requests.get(full_url, **kwargs)
 
 
 def parse_json(response):
