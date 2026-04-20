@@ -1,5 +1,5 @@
 import pytest
-from config import BASE_URL
+from Session_3_ui.config import BASE_URL
 
 
 @pytest.fixture
