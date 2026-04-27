@@ -10,14 +10,12 @@ class HttpClient:
     def get(self, path, **kwargs):
         full_url = self.base_url + path
         kwargs.setdefault("timeout", 5)
-
         return requests.get(full_url, **kwargs)
     
 
     def post(self, path, **kwargs):
         full_url = self.base_url + path
         kwargs.setdefault("timeout", 5)
-
         return requests.post(full_url, **kwargs)
 
 
