@@ -95,3 +95,15 @@ def test_post_uses_custom_timeout_when_provided(monkeypatch):
     assert captured["url"] == "https://api.example.com/posts"
     assert captured["kwargs"]["timeout"] == 10
     assert captured["kwargs"]["json"] == {"title": "test"}
+
+
+def test_post_propagates_timeout_exception(monkeypatch):
+    def fake_post(*args, **kwargs):
+        raise requests.Timeout("Request timed out")
+    
+    monkeypatch.setattr("http_client.requests.post", fake_post)
+
+    client = HttpClient("https://api.example.com")
+
+    with pytest.raises(requests.Timeout):
+        client.post("/posts", json={"title": "test"})
