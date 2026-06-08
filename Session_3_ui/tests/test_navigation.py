@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page, expect
-from test_data import LEARN_MORE_TEXT, IANA_HEADING, HOMEPAGE_HEADING
+from Session_3_ui.test_data import LEARN_MORE_TEXT, IANA_HEADING, HOMEPAGE_HEADING
 from Session_3_ui.config import BASE_URL
 
 
