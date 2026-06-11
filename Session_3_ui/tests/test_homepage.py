@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-from Session_3_ui.test_data import HOMEPAGE_HEADING, LEARN_MORE_TEXT
+from Session_3_ui.test_data import HOMEPAGE_HEADING, LEARN_MORE_TEXT, LEARN_MORE_HREF
 
 
 def test_homepage_heading_is_visible(homepage: Page):
@@ -15,7 +15,7 @@ def test_learn_more_link_is_visible_and_points_to_iana(homepage: Page):
     href = learn_more_link.get_attribute("href")
 
     assert href is not None, "Learn more link should have an href attribute"
-    assert "iana.org" in href, f"Expected Learn more link to point to IANA, got: {href}"
+    assert href == LEARN_MORE_HREF, f"Expected href to be {LEARN_MORE_HREF}, but got {href}"
 
 
 def test_homepage_title_is_correct(homepage: Page):
