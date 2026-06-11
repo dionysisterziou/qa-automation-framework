@@ -114,6 +114,39 @@ It is currently smaller in scope than the API project and represents an early Pl
 
 ---
 
+### Debugging Playwright Failures
+
+Playwright UI tests are configured to keep debugging artifacts only when a test fails.
+
+Generated artifacts may include:
+
+* `trace.zip`
+* failure screenshots
+* failure videos
+
+These files are generated under `test-results/` and are ignored by Git because they are test execution artifacts, not source code.
+
+To run the UI test suite:
+
+```bash
+python -m pytest -q Session_3_ui
+```
+
+To open the first available Playwright trace after a failure:
+
+```powershell
+$trace = Get-ChildItem -Recurse test-results -Filter trace.zip | Select-Object -First 1
+python -m playwright show-trace "$($trace.FullName)"
+```
+
+When diagnosing a Playwright failure, check:
+
+1. the failed test and line from the stack trace
+2. the Playwright call log to see what action or assertion was attempted
+3. the current page state in the trace viewer
+4. whether the failure is caused by a locator issue, wrong expected data, navigation problem, page state issue, environment problem, or real application behavior
+
+
 ## Setup
 
 Create and activate a virtual environment, then install the project dependencies.
